@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>提示</title>
+        <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+        <style>
+            html,body{
+                margin: 0;padding: 0;
+            }
+            .body{
+                width: 40%;
+                text-align: center;
+                margin: 1% auto;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="body">
+            <?php switch ($code) {?>
+                <?php case 1:?>
+                <div class="alert alert-success">
+                    <strong>成功! </strong> <?php echo(strip_tags($msg));?>
+                    <a href="<?php echo($url);?>" id="wait"><?php echo($wait);?></a>
+                </div>
+                <?php break;?>
+                <?php case 0:?>
+                <div class="alert alert-danger">
+                    <strong>提示! </strong><?php echo(strip_tags($msg));?>
+                    <a href="<?php echo($url);?>" id="wait"><?php echo($wait);?></a>
+                </div>
+                <?php break;?>
+            <?php } ?>
+        </div>
+                
+            <script type="text/javascript">
+                (function(){
+                    var wait = document.getElementById('wait');
+                    var href = wait.href;
+                    var interval = setInterval(function(){
+                        var time = --wait.innerHTML;
+                        if(time <= 0) {
+                            location.href = href;
+                            clearInterval(interval);
+                        };
+                    }, 1000);
+                })();
+            </script>   
+    </body>
+</html>
